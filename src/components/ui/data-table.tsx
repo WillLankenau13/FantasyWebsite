@@ -1,10 +1,13 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getFilteredRowModel,
 } from "@tanstack/react-table"
 
 import {
@@ -19,16 +22,33 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  selectedPositions: string[]
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  selectedPositions,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
+  // Keep the "position" column filter in sync with the checkbox state
+  useEffect(() => {
+    setColumnFilters((prev) => {
+      const others = prev.filter((f) => f.id !== "pos")
+      return [...others, { id: "pos", value: selectedPositions }]
+    })
+  }, [selectedPositions])
+
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnFilters,
+    },
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   })
 
   return (
