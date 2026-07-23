@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { columns } from "@/app/columns";
 import { DataTable } from "@/components/ui/data-table";
-import sample_data from "@/data/sample_data.json";
+import sample_data from "@/data/sample_data2.json";
 import { Checkbox } from "@/components/ui/checkbox"; 
 
 const positions = [
