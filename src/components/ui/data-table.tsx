@@ -10,8 +10,9 @@ import {
   useReactTable,
   getFilteredRowModel,
   getSortedRowModel,
+  VisibilityState, //for column visibility
+  OnChangeFn,
 } from "@tanstack/react-table"
-
 import {
   Table,
   TableBody,
@@ -23,16 +24,21 @@ import {
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   selectedPositions: string[]
+  columnVisibility: VisibilityState
+  onColumnVisibilityChange: OnChangeFn<VisibilityState>
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   selectedPositions,
+  columnVisibility,
+  onColumnVisibilityChange,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
@@ -51,9 +57,11 @@ export function DataTable<TData, TValue>({
     state: {
       columnFilters,
       sorting,
+      columnVisibility,
     },
     onColumnFiltersChange: setColumnFilters,
     onSortingChange: setSorting,
+    onColumnVisibilityChange,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -68,7 +76,6 @@ export function DataTable<TData, TValue>({
               {headerGroup.headers.map((header) => {
                 const canSort = header.column.getCanSort()
                 const sortDirection = header.column.getIsSorted()
-
                 return (
                   <TableHead key={header.id}>
                     {header.isPlaceholder ? null : canSort ? (
@@ -125,5 +132,6 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
+
   )
 }
