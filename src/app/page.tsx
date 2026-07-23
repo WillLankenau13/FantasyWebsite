@@ -11,7 +11,6 @@ const positions = [
   { id: "RB", label: "RB" },
   { id: "WR", label: "WR" },
   { id: "TE", label: "TE" },
-  { id: "DST", label: "DST" },
 ] as const;
 
 export default function Home() {

@@ -10,14 +10,17 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "player",
     header: "Player",
+    sortingFn: 'text',
   },
   {
     accessorKey: "pos",
     header: "Position",
     filterFn: positionFilter,
+    sortingFn: 'text',
   },
   {
     accessorKey: "proj",
     header: "Projection",
+    sortingFn: 'basic',
   }
 ]
