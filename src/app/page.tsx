@@ -69,6 +69,10 @@ export default function Home() {
 
   //stuff on the actual webpage
   return (
+    <>
+    <header className="w-full bg-purple-500 text-white py-6 pl-36">
+      <h1 className="text-4xl font-bold">Lankenau Projections</h1>
+    </header>
     <main className="flex min-h-screen flex-col items-center justify-start gap-12 p-24">
       {/* Multiple Checkboxes Layout */}
       <div className="flex flex-col gap-4 rounded-md border p-6 bg-slate-50 min-w-[200px]">
@@ -88,10 +92,6 @@ export default function Home() {
             </label>
           </div>
         ))}
-
-        <div className="mt-2 text-xs text-gray-500">
-          Active Filters: {selectedPositions.length ? selectedPositions.join(", ") : "None"} {/*list of active selected positions*/}
-        </div>
       </div>
 
       {/* Column toggles — standalone, not part of the table */}
@@ -146,5 +146,6 @@ export default function Home() {
       </div>
 
     </main>
+    </>
   );
 }
