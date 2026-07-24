@@ -52,7 +52,7 @@ export default function Home() {
     let cancelled = false;
     setIsLoading(true);
 
-    fetch(`/data/backfill/Model_1.0/${year}/Week_${week}_Player_Predictions.json`)
+    fetch(`/data/backfill/model_1.0/${year}/Week_${week}_Player_Predictions.json`)
       .then((res) => res.json())
       .then((json) => {
         if (!cancelled) setData(json);
