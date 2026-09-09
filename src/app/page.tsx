@@ -24,14 +24,14 @@ const columnLabels = Object.fromEntries(
 );
 
 export default function Home() {
-  const [year, setYear] = useState("2025"); //const for the year displayed; default is 2025
-  const [week, setWeek] = useState("18"); //const for the week displayed; default is 18
+  const [year, setYear] = useState("2026"); //const for the year displayed; default is 2025
+  const [week, setWeek] = useState("1"); //const for the week displayed; default is 18
   const [data, setData] = useState([]); //const for the data we are setting
   const [isLoading, setIsLoading] = useState(false);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({}); //const for the column visibility
 
   //all possible years and weeks
-  const years = ["2023", "2024", "2025"]; 
+  const years = ["2025", "2026"]; 
   const weeks = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"];
 
   const [selectedPositions, setSelectedPositions] = useState<string[]>(
@@ -52,10 +52,14 @@ export default function Home() {
     let cancelled = false;
     setIsLoading(true);
 
-    fetch(`/data/backfill/model_1.0/${year}/Week_${week}_Player_Predictions.json`)
+    fetch(`/data/published/${year}/Week_${week}_Player_Predictions.json`)
       .then((res) => res.json())
       .then((json) => {
-        if (!cancelled) setData(json);
+        if (!cancelled) {
+          setData(json.data);
+          //setMetadata(json.metadata);
+          console.log(json.data)
+        }
       })
       .catch((err) => console.error("Failed to load data:", err))
       .finally(() => {
