@@ -64,7 +64,7 @@ export const columns: ColumnDef<Player>[] = [
     {
     accessorKey: "cmp_pred",
     header: () => <HeaderAbbr short="Cmp" full="Predicted Completions" />,
-    meta: { group: "Passing", label: "Predicted Completiong" },
+    meta: { group: "Passing", label: "Predicted Completions" },
     sortingFn: 'basic',
     cell: roundedCell(),
   },
