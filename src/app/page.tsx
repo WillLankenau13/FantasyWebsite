@@ -25,7 +25,7 @@ const columnLabels = Object.fromEntries(
 
 export default function Home() {
   const [year, setYear] = useState("2026"); //const for the year displayed; default is 2025
-  const [week, setWeek] = useState("1"); //const for the week displayed; default is 18
+  const [week, setWeek] = useState("2"); //const for the week displayed; default is 18
   const [data, setData] = useState([]); //const for the data we are setting
   const [isLoading, setIsLoading] = useState(false);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({}); //const for the column visibility
